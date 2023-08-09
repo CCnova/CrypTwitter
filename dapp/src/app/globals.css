@@ -11744,3 +11744,8 @@ fieldset:disabled .btn {
   }
 }
 /*# sourceMappingURL=bootstrap.min.css.map */
+
+.message {
+  color: gray;
+  margin-top: 10px;
+}

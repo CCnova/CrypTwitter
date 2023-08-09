@@ -1,6 +1,16 @@
+"use client";
+import { doLogin } from "@/services/Web3Service";
 import Head from "next/head";
+import React from "react";
 
 export default function Home() {
+  const [message, setMessage] = React.useState<string>();
+
+  const btnLoginClick = () => {
+    setMessage("Connecting with MetaMask");
+    doLogin().then(setMessage).catch(setMessage);
+  };
+
   return (
     <>
       <Head>
@@ -31,11 +41,13 @@ export default function Home() {
               <button
                 type="button"
                 className="btn btn-primary btn-lg px-4 me-md-2"
+                onClick={btnLoginClick}
               >
                 <img src="/metamask.svg" width="64" className="me-3" />
                 Connect with MetaMask
               </button>
             </div>
+            <p className="message">{message}</p>
           </div>
         </div>
       </div>
