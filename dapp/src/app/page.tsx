@@ -1,14 +1,21 @@
 "use client";
 import { doLogin } from "@/services/Web3Service";
 import Head from "next/head";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function Home() {
+  const { push } = useRouter();
   const [message, setMessage] = React.useState<string>();
 
   const btnLoginClick = () => {
     setMessage("Connecting with MetaMask");
-    doLogin().then(setMessage).catch(setMessage);
+    doLogin()
+      .then((wallet) => push("/timeline"))
+      .catch((error) => {
+        console.error(error);
+        setMessage(error.message);
+      });
   };
 
   return (
